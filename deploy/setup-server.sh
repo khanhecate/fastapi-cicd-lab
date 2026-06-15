@@ -14,7 +14,7 @@ echo ">>> Cloning repo (you can also do this manually)..."
 cd ~
 if [ ! -d "fastapi-cicd-lab" ]; then
   echo "Repo not found. Clone it manually first:"
-  echo "  git clone <your-repo-url> ~/fastapi-cicd-lab"
+  echo "  git clone https://github.com/khanhecate/fastapi-cicd-lab.git ~/fastapi-cicd-lab"
   exit 1
 fi
 
