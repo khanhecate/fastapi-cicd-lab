@@ -49,8 +49,7 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --comment "Deploy fastapi-cicd-lab" \
             --parameters '{"commands":[
-              "git config --global --add safe.directory /home/ec2-user/fastapi-cicd-lab",
-              "cd /home/ec2-user/fastapi-cicd-lab && git pull origin main",
+              "export HOME=/root && git config --global --add safe.directory /home/ec2-user/fastapi-cicd-lab && cd /home/ec2-user/fastapi-cicd-lab && git pull origin main",
               "cd /home/ec2-user/fastapi-cicd-lab/app && source venv/bin/activate && pip install -r requirements.txt && deactivate",
               "sudo systemctl restart api"
             ]}' \
