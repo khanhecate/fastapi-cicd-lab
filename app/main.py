@@ -42,3 +42,10 @@ def get_item(item_id: int):
 @app.get("/items")
 def list_items():
     return list(items_db.values())
+
+@app.delete("/items/{item_id}")
+def delete_item(item_id: int):
+    if item_id not in items_db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    del items_db[item_id]
+    return {"message": f"Item {item_id} deleted"}
