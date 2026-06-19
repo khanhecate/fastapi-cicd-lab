@@ -1,5 +1,5 @@
-name: CI/CD - FastAPI Lab
-
+ name: CI/CD - FastAPI Lab
+  
 on:
   push:
     branches: [ "main" ]
@@ -49,8 +49,5 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --comment "Deploy fastapi-cicd-lab" \
             --parameters '{"commands":[
-              "export HOME=/root && git config --global --add safe.directory /home/ec2-user/fastapi-cicd-lab && cd /home/ec2-user/fastapi-cicd-lab && git pull origin main",
-              "cd /home/ec2-user/fastapi-cicd-lab/app && source venv/bin/activate && pip install -r requirements.txt && deactivate",
-              "sudo systemctl restart api"
-            ]}' \
+              "if ! systemctl list-unit-files | grep -q api.service; then echo \"=== First time setup ===\" && sudo dnf install -y python3 python3-pip git && cd /home/ec2-user && git clone https://github.com/khanhecate/fastapi-cicd-lab.git && cd fastapi-cicd-lab/app && python3 -m venv venv && source venv/bin/activate && pip install --upgrade pip && pip Install -r requirements.txt && deactivate && sudo cp /home/ec2-user/fastapi-cicd-lab/deploy/api.service /etc/systemd/system/api.service && sudo systemctl daemon-reload && sudo systemctl enable api && sudo systemctl start api; else echo \"=== Updating existing deployment ===\" && export HOME=/root && git config --global --add safe.directory /home/ec2-user/fastapi-cicd-lab && cd /home/ec2-user/fastapi-cicd-lab && git pull origin main && cd app && source venv/bin/activate && pip install -r requirements.txt && deactivate && sudo systemctl restart api; fi" ]}' \ 
             --output text
