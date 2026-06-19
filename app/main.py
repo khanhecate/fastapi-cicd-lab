@@ -16,7 +16,7 @@ items_db: dict[int, Item] = {}
 
 @app.get("/")
 def root():
-    return {"message": "Hello from FastAPI on Amazon Linux! Updated Version 5 new workflow"}
+    return {"message": "Hello from FastAPI on Amazon Linux! Updated Version 5 new workflow 2"}
 
 
 @app.get("/health")
